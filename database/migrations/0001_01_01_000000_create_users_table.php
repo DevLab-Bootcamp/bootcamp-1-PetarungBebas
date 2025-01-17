@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('devlab_id')->unique()->nullable();
+            $table->string('devab_role')->nullable();
             $table->string('name');
             $table->string('username')->unique()->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('faculty')->nullable();
+            $table->string('prodi')->nullable();
+            $table->text('medical_record');
+            $table->enum('role', ['PATIENT', 'DOCTOR', 'NURSE','ADMIN'])->default('PATIENT');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,7 +35,7 @@ return new class extends Migration
         });
 
         Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
