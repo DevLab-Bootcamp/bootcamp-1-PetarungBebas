@@ -7,17 +7,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends Controller
 {
-    public function loginProcess(Request $request)
-    {
-        // dd($request->all());
+    //
+
+    public function login(Request $request){
         $auth = Auth::attempt([
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ]);
 
-        if (!$auth) {
-            return redirect()->back()->with('error', 'Login failed');
+        if($auth){
+            return back()->with('error', 'Credential Anda Salah');
         }
-        return redirect()->route('dashboard.index')->with('success', 'Login success');
+
+        return redirect()->route('dashboard.index')->with('success', 'Berhasil Login');
     }
 }
