@@ -29,12 +29,7 @@ if (!function_exists('errorResponse')) {
      * @param int $code
      * @return JsonResponse
      */
-    function errorResponse(string $message, array $errors = [], int $code ): JsonResponse {
-        $errorCount = count($errors);
-
-        if ($errorCount > 1) {
-            $message .= ' (and ' . ($errorCount - 1) . ' more error' . ($errorCount > 2 ? 's' : '') . ')';
-        }
+    function errorResponse(string $message, array $errors, int $code ): JsonResponse {
 
         return response()->json([
             'message' => $message,
