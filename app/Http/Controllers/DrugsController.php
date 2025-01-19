@@ -13,8 +13,9 @@ class DrugsController extends Controller
 {
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:table',
+            'name' => 'required',
             'description' => 'required',
+            'code' => 'required|unique:drugs'
         ]);
         if ($validator->fails()) {
             return errorResponse('Validation error', $validator->errors()->all(), 422);
@@ -22,7 +23,8 @@ class DrugsController extends Controller
 
         $drug = Drugs::create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'code' => $request->code
         ]);
         return successResponse('Success create drug',[
             'data' => $drug
@@ -54,8 +56,9 @@ class DrugsController extends Controller
     }
     public function updateDrugs(Request $request, $id){
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'description' => 'required',
+            'name' => 'sometimes',
+            'description' => 'sometimes',
+            'code' => 'sometimes|unique:drugs'
         ]);
         if ($validator->fails()) {
             return errorResponse('Validation error', $validator->errors()->all(), 422);

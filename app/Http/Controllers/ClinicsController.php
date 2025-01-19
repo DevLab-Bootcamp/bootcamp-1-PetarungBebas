@@ -50,14 +50,14 @@ class ClinicsController extends Controller
             return errorResponse('Clinic not found', [], 404);
         }
         return successResponse('Success get clinics',[
-            'data' => $clinic
+            $clinic
         ]);
     }
 
     public function updateClinics(Request $request, $id){
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'address' => 'required',
+            'name' => 'sometimes',
+            'address' => 'sometimes',
         ]);
         if ($validator->fails()) {
             return errorResponse('Validation error', $validator->errors()->all(), 422);

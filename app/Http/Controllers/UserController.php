@@ -13,7 +13,8 @@ use function App\Helpers\successResponse;
 
 class UserController extends Controller
 {
-    public function addUser(request $request){
+    public function addUser(request $request)
+    {
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|unique:users,username',
             'name' => 'required|string|',
@@ -28,10 +29,11 @@ class UserController extends Controller
         }
 
         $user = User::create([
+            'username' => $request->username,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'PATIEN'
+            'role' => $request->role
         ]);
 
         $userProfile = UserProfile::create([
@@ -43,38 +45,46 @@ class UserController extends Controller
         // Kirim respons sukses dengan data user yang baru terdaftar
         return successResponse('Registration successful', [
             'user' => $user,
-            'userProfile' => $userProfile
+            // 'userProfile' => $userProfile
         ]);
     }
 
-    public function getUsers(){
-        $user = User::all();
-        if($user->isEmpty()){
+    public function getUsers()
+    {
+        $user = User::join('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+        ->select('users.*', 'user_profiles.*')
+        ->get();
+        if (!$user) {
             return errorResponse('User not found', [], 404);
         }
-        return successResponse('Success get all users',[
-            'data' => $user
+        return successResponse('Success get all users', [
+            $user
         ]);
     }
-    public function getUserProfileById($id){
-        $user = UserProfile::where('user_id', $id)->first();
+    public function getUserProfileById($id)
+    {
+        $user = UserProfile::find($id);
         return $user;
     }
-    public function getUserByName(Request $request){
-        $user = User::where('name', 'like', '%' . $request->name . '%')->get();
-        if ($user->isEmpty()) {
+    public function getUserByName(Request $request)
+    {
+        $users = User::join('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->where('users.name', 'like', '%' . $request->name . '%')
+            ->select('users.*', 'user_profiles.*')
+            ->get();
+
+        if ($users->isEmpty()) {
             return errorResponse('User not found', [], 404);
         }
-        $data = $this->getUserProfileById($user->id);
-        if ($data->isEmpty()) {
-            return errorResponse('User not found', [], 404);
-        }
-        return successResponse('Success get user',[
-            'data' => $data
+
+        return successResponse('Success get user', [
+            $users
         ]);
     }
-    public function updateUser(Request $request, $id){
-        $user = User::find($id);
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::where('id', $id)->first();
         if (!$user) {
             return errorResponse('User not found', [], 404);
         }
@@ -83,26 +93,27 @@ class UserController extends Controller
             'email' => 'sometimes|email|unique:users,email,' . $user->id,
             'password' => 'sometimes|string|min:6|confirmed',
         ]);
-    
+
         if (isset($validatedData['password'])) {
             $validatedData['password'] = Hash::make($request->password);
         }
-    
+
         $user->update($validatedData);
-    
+
         return successResponse('Success update user', [
-            'data' => $user,
+            $user,
         ]);
     }
 
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
         $user = User::find($id);
         if (!$user) {
             return errorResponse('User not found', [], 404);
         }
         $user->delete();
-        return successResponse('Success delete user',[
-            'data' => $user
+        return successResponse('Success delete user', [
+            $user
         ]);
     }
 }
