@@ -49,16 +49,24 @@ class UserController extends Controller
 
     public function getUsers(){
         $user = User::all();
-        if(!$user){
+        if($user->isEmpty()){
             return errorResponse('User not found', [], 404);
         }
         return successResponse('Success get all users',[
             'data' => $user
         ]);
     }
-    public function getUserById($id){
-        $user = User::find($id);
-        if (!$user) {
+    public function getUserProfileById($id){
+        $user = UserProfile::find($id);
+        return $user;
+    }
+    public function getUserByName(Request $request){
+        $user = User::where('name', 'like', '%' . $request->name . '%')->get();
+        if ($user->isEmpty()) {
+            return errorResponse('User not found', [], 404);
+        }
+        $user = $this->getUserProfileById($user->id);
+        if ($user->isEmpty()) {
             return errorResponse('User not found', [], 404);
         }
         return successResponse('Success get user',[
