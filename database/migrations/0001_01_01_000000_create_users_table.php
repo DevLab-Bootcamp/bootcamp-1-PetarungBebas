@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('faculty')->nullable();
             $table->string('prodi')->nullable();
-            $table->text('medical_record');
+            $table->text('medical_record')->nullable();
             $table->enum('role', ['PATIENT', 'DOCTOR', 'NURSE','ADMIN'])->default('PATIENT');
             $table->rememberToken();
             $table->timestamps();
