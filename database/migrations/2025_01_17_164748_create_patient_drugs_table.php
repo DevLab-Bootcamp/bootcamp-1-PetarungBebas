@@ -18,6 +18,7 @@ return new class extends Migration
             $table->json('icds');
             $table->text('description')->nullable(); 
             $table->timestamps(); 
+            $table->softDeletes();
             
             $table->foreign('patient_diagnose_id')->references('id')->on('patient_diagnose')->onDelete('cascade');
         });

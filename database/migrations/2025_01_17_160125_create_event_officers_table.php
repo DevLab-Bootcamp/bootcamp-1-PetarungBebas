@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('schedule_event_id');
             $table->uuid('user_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('schedule_event_id')->references('id')->on('schedule_events')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

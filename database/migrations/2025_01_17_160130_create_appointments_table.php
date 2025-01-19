@@ -19,6 +19,7 @@ return new class extends Migration
         $table->text('anamnesis')->nullable();
         $table->enum('status', ['PENDING', 'CONFIRMED', 'CANCELLED'])->default('PENDING');
         $table->timestamps();
+        $table->softDeletes();
 
         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         // Constraint untuk schedule_id bisa disesuaikan berdasarkan tabel yang sesuai (schedule_doctors atau schedule_events)

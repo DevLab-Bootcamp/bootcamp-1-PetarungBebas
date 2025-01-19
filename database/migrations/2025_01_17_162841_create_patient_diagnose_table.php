@@ -20,6 +20,7 @@ return new class extends Migration
         $table->text('medical_letter_porpuse')->nullable();
         $table->text('medical_letter_result')->nullable();
         $table->timestamps();
+        $table->softDeletes();
 
         $table->foreign('patient_medical_record_id')->references('id')->on('patient_appointment_record')->onDelete('cascade');
         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

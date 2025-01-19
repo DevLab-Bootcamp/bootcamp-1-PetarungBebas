@@ -19,6 +19,7 @@ return new class extends Migration
         $table->uuid('doctor_user_id');
         $table->enum('status', ['PENDING', 'CONFIRMED', 'CANCELLED'])->default('PENDING');
         $table->timestamps();
+        $table->softDeletes();
 
         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade');

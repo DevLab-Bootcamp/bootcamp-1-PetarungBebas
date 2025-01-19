@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('end_time');
             $table->date('date');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
