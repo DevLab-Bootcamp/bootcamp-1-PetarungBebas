@@ -15,9 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
             $middleware->validateCsrfTokens(
                 except: [
-                    'stripe/*', // Semua rute yang dimulai dengan 'stripe/'
-                    'http://example.com/foo/bar', // Rute spesifik
-                    'http://example.com/foo/*', // Semua rute di bawah '/foo/'
                     'api/*' // Semua rute yang dimulai dengan 'api/'
                 ]
             );
