@@ -1,11 +1,40 @@
 <?php
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ClinicsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DrugsController;
+use App\Http\Controllers\IcdsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('dashboard');
 });
-Route::post('/login', [AuthenticationController::class, 'loginProcess'])->name('auth.login');
+Route::view('/auth-login', 'auth.login');
+Route::post('/api/login', [AuthenticationController::class, 'login'])->name('auth.login');
+Route::post('/api/register', [UserController::class, 'addUser']);
+Route::get('/api/user', [UserController::class, 'getUsers']);
+Route::get('/api/user/{name}', [UserController::class, 'getUserByName']);
+Route::get('/api/user/{id}', [UserController::class, 'getUserById']);
+Route::put('/api/user/{id}', [UserController::class, 'updateUser']);
+Route::delete('/api/user/{id}', [UserController::class, 'deleteUser']);
+
+Route::get('/api/icd', [IcdsController::class, 'getIcds']);
+Route::post('/api/icd', [IcdsController::class, 'create']);
+Route::put('/api/icd/{id}', [IcdsController::class, 'updateIcds']);
+Route::delete('/api/icd/{id}', [IcdsController::class, 'deleteIcds']);
+Route::get('/icds/search', [IcdsController::class, 'searchIcds']);
+
+Route::get('/api/clinic', [ClinicsController::class, 'getClinics']);
+Route::post('/api/clinic', [ClinicsController::class, 'create']);
+Route::put('/api/clinic/{id}', [ClinicsController::class, 'updateClinics']);
+Route::delete('/api/clinic/{id}', [ClinicsController::class, 'deleteClinics']);
+Route::get('/clinics/search', [ClinicsController::class, 'searchClinics']);
+
+Route::get('/api/drug', [DrugsController::class, 'getDrugs']);
+Route::post('/api/drug', [DrugsController::class, 'create']);
+Route::put('/api/drug/{id}', [DrugsController::class, 'updateDrugs']);
+Route::delete('/api/drug/{id}', [DrugsController::class, 'deleteDrugs']);
+Route::get('/drugs/search', [DrugsController::class, 'searchDrugs']);
 
