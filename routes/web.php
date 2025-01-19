@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 Route::view('/auth-login', 'auth.login');
 Route::post('/api/login', [AuthenticationController::class, 'login'])->name('auth.login');
@@ -38,4 +38,3 @@ Route::put('/api/drug/{id}', [DrugsController::class, 'updateDrugs']);
 Route::delete('/api/drug/{id}', [DrugsController::class, 'deleteDrugs']);
 Route::get('/drugs/search', [DrugsController::class, 'searchDrugs']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

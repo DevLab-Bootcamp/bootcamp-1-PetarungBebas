@@ -1,7 +1,7 @@
 @extends('template.auth')
 @section('title','Login')
 @section('form')
-<form class="space-y-4 md:space-y-6" action="{{route('auth.login')}}" method="post">
+<form class="space-y-4 md:space-y-6" action="{{route('auth.login')}}" method="POST">
     @csrf
     @if (session('error'))
     <div>
