@@ -22,12 +22,11 @@ class UserController extends Controller
             'gender' => 'required',
             'religion' => 'required'
         ]);
-        // Jika validasi gagal
+
         if ($validator->fails()) {
             return errorResponse('Validation error', $validator->errors()->all(), 422);
         }
 
-        // Buat user baru
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -43,7 +42,8 @@ class UserController extends Controller
 
         // Kirim respons sukses dengan data user yang baru terdaftar
         return successResponse('Registration successful', [
-            'data' => $user,
+            'user' => $user,
+            'userProfile' => $userProfile
         ]);
     }
 
@@ -57,7 +57,7 @@ class UserController extends Controller
         ]);
     }
     public function getUserProfileById($id){
-        $user = UserProfile::find($id);
+        $user = UserProfile::where('user_id', $id)->first();
         return $user;
     }
     public function getUserByName(Request $request){
@@ -65,12 +65,12 @@ class UserController extends Controller
         if ($user->isEmpty()) {
             return errorResponse('User not found', [], 404);
         }
-        $user = $this->getUserProfileById($user->id);
-        if ($user->isEmpty()) {
+        $data = $this->getUserProfileById($user->id);
+        if ($data->isEmpty()) {
             return errorResponse('User not found', [], 404);
         }
         return successResponse('Success get user',[
-            'data' => $user
+            'data' => $data
         ]);
     }
     public function updateUser(Request $request, $id){

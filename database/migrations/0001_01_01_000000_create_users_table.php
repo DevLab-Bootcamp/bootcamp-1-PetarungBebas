@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('role');
+            $table->string('role')->default('PATIEN');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
