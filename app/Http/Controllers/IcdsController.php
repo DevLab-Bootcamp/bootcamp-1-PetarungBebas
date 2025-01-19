@@ -15,7 +15,7 @@ class IcdsController extends Controller
         $validator = Validator::make($request->all(), [
             'name_en' => 'required',
             'name_id' => 'required',
-            'code' => 'required|unique:table'
+            'code' => 'required|unique:icds'
         ]);  
         if ($validator->fails()) {
             return errorResponse('Validation error', $validator->errors()->all(), 422);
@@ -33,7 +33,7 @@ class IcdsController extends Controller
 
     public function getIcds(){
         $icd = Icds::all();
-        if($icd->isEmpty()){
+        if(!$icd){
             return errorResponse('Icd not found', [], 404);
         }
         return successResponse('Success get all icd',[
@@ -48,7 +48,7 @@ class IcdsController extends Controller
 
     public function searchIcds(Request $request){
         $icd = Icds::where('name_en', 'like', '%'.$request->search.'%')->orWhere('name_id', 'like', '%'.$request->search.'%')->get();
-        if ($icd->isEmpty()) {
+        if (!$icd) {
             return errorResponse('Icd not found', [], 404);
         }
         return successResponse('Success get icd',[
@@ -58,9 +58,9 @@ class IcdsController extends Controller
 
     public function updateIcds(Request $request, $id){
         $validator = Validator::make($request->all(), [
-            'name_en' => 'required',
-            'name_id' => 'required',
-            'code' => 'required|unique:table'
+            'name_en' => 'sometimes',
+            'name_id' => 'sometimes',
+            'code' => 'sometimes|unique:table'
         ]);  
         if ($validator->fails()) {
             return errorResponse('Validation error', $validator->errors()->all(), 422);
