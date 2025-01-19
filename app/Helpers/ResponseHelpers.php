@@ -12,11 +12,17 @@ if (!function_exists('successResponse')) {
      * @param int $code
      * @return JsonResponse
      */
-    function successResponse(string $message,array $data, int $code = 200): JsonResponse {
-        return response()->json([
+    function successResponse(string $message, array $data,string $token = '', int $code = 200): JsonResponse
+    {
+        $response = [
             'message' => $message,
             'data' => $data,
-        ], $code);
+        ];
+        if (!empty($token)) {
+            $response['token'] = $token;
+        }
+
+        return response()->json($response, $code);
     }
 }
 
@@ -29,12 +35,18 @@ if (!function_exists('errorResponse')) {
      * @param int $code
      * @return JsonResponse
      */
-    function errorResponse(string $message, array $errors, int $code ): JsonResponse {
-
-        return response()->json([
+    function errorResponse(string $message, array $errors = [], int $code): JsonResponse
+    {
+        $response = [
             'message' => $message,
-            'errors' => $errors,
-        ], $code);
+        ];
+
+        // Tambahkan errors jika tidak kosong
+        if (!empty($errors)) {
+            $response['errors'] = $errors;
+        }
+
+        return response()->json($response, $code);
     }
 }
 
