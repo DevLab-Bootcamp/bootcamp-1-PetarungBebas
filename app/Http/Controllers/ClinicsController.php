@@ -45,7 +45,7 @@ class ClinicsController extends Controller
     }
 
     public function searchClinics(Request $request){
-        $clinic = Clinics::where('name', 'like', '%' . $request->name . '%')->get();
+        $clinic = Clinics::where('name', 'like', '%' . $request->search. '%')->get();
         if ($clinic->isEmpty()) {
             return errorResponse('Clinic not found', [], 404);
         }
