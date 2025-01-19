@@ -24,17 +24,17 @@ Route::get('/api/icd', [IcdsController::class, 'getIcds']);
 Route::post('/api/icd', [IcdsController::class, 'create']);
 Route::put('/api/icd/{id}', [IcdsController::class, 'updateIcds']);
 Route::delete('/api/icd/{id}', [IcdsController::class, 'deleteIcds']);
-Route::get('/icds/search', [IcdsController::class, 'searchIcds']);
+Route::get('/api/icd/{search}', [IcdsController::class, 'searchIcds']);
 
 Route::get('/api/clinic', [ClinicsController::class, 'getClinics']);
 Route::post('/api/clinic', [ClinicsController::class, 'create']);
 Route::put('/api/clinic/{id}', [ClinicsController::class, 'updateClinics']);
 Route::delete('/api/clinic/{id}', [ClinicsController::class, 'deleteClinics']);
-Route::get('/clinics/search', [ClinicsController::class, 'searchClinics']);
+Route::get('/api/clinic/{search}', [ClinicsController::class, 'searchClinics']);
 
 Route::get('/api/drug', [DrugsController::class, 'getDrugs']);
 Route::post('/api/drug', [DrugsController::class, 'create']);
 Route::put('/api/drug/{id}', [DrugsController::class, 'updateDrugs']);
 Route::delete('/api/drug/{id}', [DrugsController::class, 'deleteDrugs']);
-Route::get('/drugs/search', [DrugsController::class, 'searchDrugs']);
+Route::get('/api/drug/{search}', [DrugsController::class, 'searchDrugs']);
 
