@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ClinicsController;
 use App\Http\Controllers\DashboardController;
@@ -8,11 +9,21 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
+
+
+Route::middleware(['checkRole:admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('dashboard');
+    });
+    // Route khusus admin lainnya
+});
 Route::get('/', function () {
     return view('dashboard');
 });
 Route::view('/auth-login', 'auth.login');
 Route::post('/api/login', [AuthenticationController::class, 'login'])->name('auth.login');
+Route::view('/auth-register', 'auth.register');
+
 Route::post('/api/register', [UserController::class, 'addUser']);
 Route::get('/api/user', [UserController::class, 'getUsers']);
 Route::get('/api/user/{name}', [UserController::class, 'getUserByName']);
@@ -37,4 +48,3 @@ Route::post('/api/drug', [DrugsController::class, 'create']);
 Route::put('/api/drug/{id}', [DrugsController::class, 'updateDrugs']);
 Route::delete('/api/drug/{id}', [DrugsController::class, 'deleteDrugs']);
 Route::get('/api/drug/{search}', [DrugsController::class, 'searchDrugs']);
-

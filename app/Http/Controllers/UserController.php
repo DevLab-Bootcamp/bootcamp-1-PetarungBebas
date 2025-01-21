@@ -64,7 +64,12 @@ class UserController extends Controller
     public function getUserProfileById($id)
     {
         $user = UserProfile::find($id);
-        return $user;
+        if (!$user) {
+            return errorResponse('User not found', [], 404);
+        }
+        return successResponse('Success get user', [
+            $user
+        ]);
     }
     public function getUserByName(Request $request)
     {
@@ -73,7 +78,7 @@ class UserController extends Controller
             ->select('users.*', 'user_profiles.*')
             ->get();
 
-        if ($users->isEmpty()) {
+        if (!$users) {
             return errorResponse('User not found', [], 404);
         }
 

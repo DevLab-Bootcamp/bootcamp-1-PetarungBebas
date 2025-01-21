@@ -42,12 +42,18 @@ class AuthenticationController extends Controller
             $errors['errors'][] = 'The email or password is incorrect.';
             return errorResponse('Invalid credentials', $errors, 401);
         }
+
         $user = Auth::user(); 
-        $token = "JWTAuth::fromUser(user)";  
+        $token = JWTAuth::fromUser($user);  
 
         return successResponse('Login successful', [
             'user' => $user, 
         ],$token);
 
+    }
+    public function logout()
+    {
+        JWTAuth::invalidate(JWTAuth::getToken());
+        return successResponse('Logout successful', []);
     }
 }
