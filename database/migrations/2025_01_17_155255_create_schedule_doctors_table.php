@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('schedule_doctors', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id');
-            $table->enum('gender', ['MALE', 'FEMALE']);
-            $table->text('address')->nullable();
-            $table->date('birth')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('religion');
+            $table->uuid('clinic_id');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_profiles');
+        Schema::dropIfExists('schedule_doctors');
     }
 };
