@@ -106,7 +106,7 @@ class UserController extends Controller
         $user->update($validatedData);
 
         return successResponse('Success update user', [
-            $user,
+           'user' => $user,
         ]);
     }
 

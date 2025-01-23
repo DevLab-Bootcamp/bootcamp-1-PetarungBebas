@@ -44,7 +44,7 @@ class AuthenticationController extends Controller
         }
 
         $user = Auth::user(); 
-        $token = JWTAuth::fromUser($user);  
+        $token = JWTAuth::fromUser($user, [ 'user_id' => $user->id]);  
         $redirectTo = $this->redirectTo($user->role);
 
         return response()->json(['token' => $token, 'redirect_to' => $redirectTo]);
