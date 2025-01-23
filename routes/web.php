@@ -13,7 +13,8 @@ Route::get('/', function () {
 });
 Route::view('/auth-login', 'auth.login');
 Route::post('/api/login', [AuthenticationController::class, 'login'])->name('auth.login');
-Route::post('/api/register', [UserController::class, 'addUser']);
+Route::view('/auth-register', 'auth.register');
+Route::post('/api/register', [UserController::class, 'addUser'])->name('auth.register');
 Route::get('/api/user', [UserController::class, 'getUsers']);
 Route::get('/api/user/{name}', [UserController::class, 'getUserByName']);
 Route::get('/api/user/{id}', [UserController::class, 'getUserById']);
