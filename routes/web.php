@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('dashboard');
 });
 Route::view('/auth-login', 'auth.login');
-Route::post('/api/login', [AuthenticationController::class, 'login'])->name('auth.login');
+Route::post('/api/login', [AuthenticationController::class, 'login']);
 Route::view('/auth-register', 'auth.register');
 
 Route::post('/api/register', [UserController::class, 'addUser']);
