@@ -26,7 +26,6 @@ Route::get('/', function () {
 Route::view('/auth-login', 'auth.login');
 Route::post('/api/login', [AuthenticationController::class, 'login']);
 Route::view('/auth-register', 'auth.register');
-
 Route::post('/api/register', [UserController::class, 'addUser']);
 Route::get('/api/user', [UserController::class, 'getUsers']);
 Route::get('/api/user/{name}', [UserController::class, 'getUserByName']);
