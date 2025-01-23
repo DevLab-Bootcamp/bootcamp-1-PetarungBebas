@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +25,7 @@
           />
           <div class="flex items-center space-x-4">
             <a href="{{url('/auth-login')}}">
-              <button type="button" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2">Login</button>
+              <button type="button" class="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2">Login</button>
             </a>
           </div>
         </div>
@@ -112,18 +111,6 @@
       </div>
     </div>
 
-    <!-- CTA Buttons -->
-    <div class="mt-10 flex flex-wrap gap-4">
-      <button class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600">
-        Jadwalkan Konsultasi
-      </button>
-      <button class="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg shadow hover:bg-gray-200">
-        Lihat Semua Layanan
-      </button>
-      <button class="bg-green-500 text-white px-6 py-3 rounded-lg shadow hover:bg-green-600">
-        Hubungi Kami
-      </button>
-    </div>
   </div>
     </div>
   </div>
