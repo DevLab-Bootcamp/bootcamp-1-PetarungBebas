@@ -72,7 +72,7 @@ class IcdsController extends Controller
         }
         $icd->update($validator->validated());
         return successResponse('Success update icd',[
-            'data' => $icd
+            'icd' => $icd
         ]);
 
     }

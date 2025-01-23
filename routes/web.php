@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ClinicsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrugsController;
 use App\Http\Controllers\IcdsController;
+use App\Http\Controllers\ScheduleDoctorsController;
+use App\Http\Controllers\ScheduleEventsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -48,3 +51,21 @@ Route::post('/api/drug', [DrugsController::class, 'create']);
 Route::put('/api/drug/{id}', [DrugsController::class, 'updateDrugs']);
 Route::delete('/api/drug/{id}', [DrugsController::class, 'deleteDrugs']);
 Route::get('/api/drug/{search}', [DrugsController::class, 'searchDrugs']);
+
+Route::get('api/appointment',[AppointmentsController::class, 'getAppointments']);
+Route::post('api/appointment',[AppointmentsController::class, 'create']);
+Route::put('api/appointment/{id}',[AppointmentsController::class, 'update']);
+Route::delete('api/appointment/{id}',[AppointmentsController::class, 'delete']);
+Route::get('api/appointment/user',[AppointmentsController::class, 'getAppointmentsByUserID']);
+
+Route::get('/api/schedule/doctor',[ScheduleDoctorsController::class], 'getScheduleDoctors');
+Route::post('/api/schedule/doctor',[ScheduleDoctorsController::class], 'create');
+Route::put('/api/schedule/doctor/{id}',[ScheduleDoctorsController::class], 'updateScheduleDoctor');
+Route::delete('/api/schedule/doctor/{id}',[ScheduleDoctorsController::class], 'deleteScheduleDoctor');
+Route::get('/api/schedule/doctor/{id}',[ScheduleDoctorsController::class], 'getScheduleDoctorsByIdr');
+
+Route::get('/api/schedule/event',[ScheduleEventsController::class], 'getScheduleEvents');
+Route::post('/api/schedule/event',[ScheduleEventsController::class], 'create');
+Route::put('/api/schedule/event/{id}',[ScheduleEventsController::class], 'update');
+Route::delete('/api/schedule/event/{id}',[ScheduleEventsController::class], 'delete');
+Route::get('/api/schedule/event/user',[ScheduleEventsController::class], 'getScheduleEventByUserID');//yang ini masih ragu dipakai atau enggak
