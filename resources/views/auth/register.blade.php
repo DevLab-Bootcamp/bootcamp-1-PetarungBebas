@@ -1,7 +1,7 @@
 @extends('template.auth')
 @section('title','Register')
 @section('form')
-<form class="space-y-4 md:space-y-6" action="{{route('auth.register')}}" method="POST">
+<form class="space-y-4 md:space-y-6" action="{{route('auth.register')}}" method="POST" id="registerForm">
     @csrf
     @csrf
     @if (session('error'))
@@ -39,4 +39,29 @@
         Sudah Punya Akun? <a href="{{url('/auth-login')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
     </p>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async function(event){
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const gender = document.getElementById('gender').value;
+
+        try{
+            const response = await axios.post('/api/register', { username, name, email, password, gender });
+            const token = response.data.token;
+            const redirectTo = response.data.redirect_to;
+
+            // Menyimpan token di localStorage
+            localStorage.setItem('jwtToken', token);
+
+            // Redirect ke URL yang sesuai berdasarkan response backend
+            window.location.href = redirectTo;
+        } catch (error) {
+            console.error("Register failed", error);
+        }
+    })
+</script>
 @endsection
