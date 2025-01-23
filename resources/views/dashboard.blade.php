@@ -87,6 +87,43 @@
       </main>
     </div>
   </div>
+  <button type="submit" id="redirectButton" class="w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
 </body>
 
+<script>
+    // Mengambil tombol dengan id "redirectButton"
+    document.getElementById('redirectButton').addEventListener('click', function() {
+        // Mengambil token JWT dari localStorage
+        const token = localStorage.getItem('jwtToken');
+        
+        // Mengecek apakah token ada
+        if (token) {
+            // Mengalihkan pengguna ke halaman baru dengan menambahkan token ke header
+            fetch('/admin', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json()) // Mengambil data dalam format JSON
+            .then(data => {
+              console.log(data);
+                if (response.ok) {
+                    window.location.href = '/admin';  // Jika token valid, redirect ke halaman admin
+                } else {
+                    // Menampilkan pesan error dari response jika ada
+                    const errorMessage = data.message || 'Terjadi kesalahan pada server.';
+                    alert(errorMessage);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan');
+            });
+        } else {
+            alert('Anda harus login terlebih dahulu');
+        }
+    });
+</script>
 </html>

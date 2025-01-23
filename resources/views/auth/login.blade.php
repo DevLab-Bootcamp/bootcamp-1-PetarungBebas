@@ -1,14 +1,15 @@
 @extends('template.auth')
-@section('title','Login')
+
+@section('title', 'Login')
+
 @section('form')
-<form class="space-y-4 md:space-y-6" action="{{route('auth.login')}}" method="POST">
+<form class="space-y-4 md:space-y-6" id="loginForm">
     @csrf
     @if (session('error'))
-    <div>
-        {{session('error')}}
-    </div>
+        <div>
+            {{ session('error') }}
+        </div>
     @endif
-
 
     <div>
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -34,4 +35,33 @@
         Don't have an account yet? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
     </p>
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // Mencegah default behavior dari form submit
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Mencegah form submit default
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        try {
+            const response = await axios.post('/api/login', { email, password });
+
+            const token = response.data.token;
+            const redirectTo = response.data.redirect_to;
+
+            // Menyimpan token di localStorage
+            localStorage.setItem('jwtToken', token);
+
+            // Redirect ke URL yang sesuai berdasarkan response backend
+            window.location.href = redirectTo;
+        } catch (error) {
+            console.error("Login failed", error);
+            // Menampilkan pesan error jika login gagal
+            alert('Login failed. Please check your credentials.');
+        }
+    });
+</script>
+
 @endsection
