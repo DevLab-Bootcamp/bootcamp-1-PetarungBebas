@@ -24,9 +24,10 @@ Route::get('/', function () {
     return view('dashboard');
 });
 Route::view('/auth-login', 'auth.login');
-Route::post('/api/login', [AuthenticationController::class, 'login']);
+Route::post('/api/login', [AuthenticationController::class, 'login'])->name('auth.login');
 Route::view('/auth-register', 'auth.register');
-Route::post('/api/register', [UserController::class, 'addUser']);
+Route::post('/api/register', [UserController::class, 'addUser'])->name('auth.register');
+Route::view('/dashboard-user','dashboard.user');
 Route::get('/api/user', [UserController::class, 'getUsers']);
 Route::get('/api/user/{name}', [UserController::class, 'getUserByName']);
 Route::get('/api/user/{id}', [UserController::class, 'getUserById']);

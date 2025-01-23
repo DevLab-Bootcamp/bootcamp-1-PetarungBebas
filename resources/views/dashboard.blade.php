@@ -18,11 +18,6 @@
       <header class="bg-white shadow p-4 flex items-center justify-between">
         <h2 class="text-xl font-bold">Dashboard</h2>
         <div class="flex items-center space-x-4">
-          <input
-            type="text"
-            placeholder="Cari..."
-            class="border rounded-lg px-4 py-2 text-sm"
-          />
           <div class="flex items-center space-x-4">
             <a href="{{url('/auth-login')}}">
               <button type="button" class="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2">Login</button>
