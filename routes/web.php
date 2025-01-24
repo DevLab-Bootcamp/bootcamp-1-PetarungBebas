@@ -6,6 +6,8 @@ use App\Http\Controllers\ClinicsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrugsController;
 use App\Http\Controllers\IcdsController;
+use App\Http\Controllers\PatientAppointmentRecordController;
+use App\Http\Controllers\PatientDiagnoseController;
 use App\Http\Controllers\ScheduleDoctorsController;
 use App\Http\Controllers\ScheduleEventsController;
 use App\Http\Controllers\UserController;
@@ -57,15 +59,18 @@ Route::post('api/appointment',[AppointmentsController::class, 'create']);
 Route::put('api/appointment/{id}',[AppointmentsController::class, 'update']);
 Route::delete('api/appointment/{id}',[AppointmentsController::class, 'delete']);
 Route::get('api/appointment/user',[AppointmentsController::class, 'getAppointmentsByUserID']);
+Route::get('/api/appointment/record/user', [PatientAppointmentRecordController::class, 'getByUserId']);//riwayat pemeriksaan
 
-Route::get('/api/schedule/doctor',[ScheduleDoctorsController::class, 'getScheduleDoctors']);
+Route::get('/api/schedule/doctor',[ScheduleDoctorsController::class, 'getScheduleDoctors']);//jadwal dokter
 Route::post('/api/schedule/doctor',[ScheduleDoctorsController::class, 'create']);
 Route::put('/api/schedule/doctor/{id}',[ScheduleDoctorsController::class, 'updateScheduleDoctor']);
 Route::delete('/api/schedule/doctor/{id}',[ScheduleDoctorsController::class, 'deleteScheduleDoctor']);
 Route::get('/api/schedule/doctor/{id}',[ScheduleDoctorsController::class, 'getScheduleDoctorsByIdr']);
 
-Route::get('/api/schedule/event',[ScheduleEventsController::class, 'getScheduleEvents']);
+Route::get('/api/schedule/event',[ScheduleEventsController::class, 'getScheduleEvents']);//jadwal event
 Route::post('/api/schedule/event',[ScheduleEventsController::class, 'create']);
 Route::put('/api/schedule/event/{id}',[ScheduleEventsController::class, 'update']);
 Route::delete('/api/schedule/event/{id}',[ScheduleEventsController::class, 'delete']);
 Route::get('/api/schedule/event/user',[ScheduleEventsController::class, 'getScheduleEventByUserID']);//yang ini masih ragu dipakai atau enggak
+
+Route::get('api/diagnose/user', [PatientDiagnoseController::class, 'getByUserId']);//medical check up dan surat dokter

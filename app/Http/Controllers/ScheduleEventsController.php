@@ -50,19 +50,12 @@ class ScheduleEventsController extends Controller
     }
 
     public function getScheduleEventByUserID(){
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-        } catch (TokenExpiredException $e) {
-            return errorResponse('token_expired', [$e], 401);
-        } catch (TokenInvalidException $e) {
-            return errorResponse('token_invalid', [$e], 400);
-        } catch (JWTException $e) {
-            return errorResponse('token_absent', [$e], 400);
-        }
+        $user = JWTAuth::parseToken()->authenticate();
 
-        $userId = JWTAuth::parseToken()->getPayload()->get('user_id');
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        $userId = $user->id; 
         $schedules = EventOfficers::join('users', 'event_officers.user_id', '=', 'users.id')
         ->join('schedule_events', 'event_officers.schedule_event_id', '=', 'schedule_events.id')
         ->where('users.id', '=', $userId)

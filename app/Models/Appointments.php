@@ -22,4 +22,8 @@ class Appointments extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function users() {
+        return $this->belongsToMany(User::class, 'patient_appointment_record', 'appointment_id', 'user_id')
+                    ->withPivot('clinic_id', 'doctor_user_id', 'status');
+    }
 }

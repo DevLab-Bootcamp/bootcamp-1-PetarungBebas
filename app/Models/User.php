@@ -72,4 +72,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    public function appointments() {
+        return $this->belongsToMany(Appointments::class, 'patient_appointment_record', 'user_id', 'appointment_id')
+                    ->withPivot('clinic_id', 'doctor_user_id', 'status');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class); // Asumsi relasi Many-to-Many dengan tabel roles
+    }
 }
