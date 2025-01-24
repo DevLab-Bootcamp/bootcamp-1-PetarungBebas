@@ -46,7 +46,7 @@ class ScheduleDoctorsController extends Controller
     }
 
     return successResponse('Success get all schdeule doctors', [
-        $schedules
+        'schedules'=> $schedules
     ]);
     }
 
