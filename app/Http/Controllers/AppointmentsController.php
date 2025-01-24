@@ -16,19 +16,12 @@ class AppointmentsController extends Controller
 {
     public function create(Request $request, $scheduleId)
     {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-        } catch (TokenExpiredException $e) {
-            return errorResponse('token_expired', [$e], 401);
-        } catch (TokenInvalidException $e) {
-            return errorResponse('token_invalid', [$e], 400);
-        } catch (JWTException $e) {
-            return errorResponse('token_absent', [$e], 400);
-        }
+        $user = JWTAuth::parseToken()->authenticate();
 
-        $userId = JWTAuth::parseToken()->getPayload()->get('user_id');
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        $userId = $user->id; 
 
         $validator = Validator::make($request->all(), [
             'schedule_id' => 'required',
@@ -72,19 +65,12 @@ class AppointmentsController extends Controller
 
     public function getAppointmentsByUserID()
     {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-        } catch (TokenExpiredException $e) {
-            return errorResponse('token_expired', [$e], 401);
-        } catch (TokenInvalidException $e) {
-            return errorResponse('token_invalid', [$e], 400);
-        } catch (JWTException $e) {
-            return errorResponse('token_absent', [$e], 400);
-        }
+        $user = JWTAuth::parseToken()->authenticate();
 
-        $userId = JWTAuth::parseToken()->getPayload()->get('user_id');
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        $userId = $user->id; 
         $appointments = Appointments::with([
             'schedule' => function ($query) {
                 $query->with(['doctor:name', 'clinic:name,address']);

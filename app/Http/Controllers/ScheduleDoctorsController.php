@@ -38,7 +38,7 @@ class ScheduleDoctorsController extends Controller
     public function getScheduleDoctors(){
         $schedules = ScheduleDoctors::join('users', 'schedule_doctors.user_id', '=', 'users.id')
         ->join('clinics', 'schedule_doctors.clinic_id', '=', 'clinics.id')
-        ->select('schedule_doctors.*','users.name', 'clinics.name', 'clinics.address')
+        ->select('schedule_doctors.*','users.name as user_name', 'clinics.name as clinic_name', 'clinics.address')
         ->get();
 
     if (!$schedules) {
@@ -54,7 +54,7 @@ class ScheduleDoctorsController extends Controller
         $schedules = ScheduleDoctors::join('users', 'schedule_doctors.user_id', '=', 'users.id')
         ->join('clinics', 'schedule_doctors.clinic_id', '=', 'clinics.id')
         ->where('schedule_doctors.id', '=', $id)
-        ->select('schedule_doctors.*','users.name', 'clinics.name', 'clinics.address')
+        ->select('schedule_doctors.*','users.name as user_name', 'clinics.name as clinic_name', 'clinics.address')
         ->get();
 
     if (!$schedules) {
