@@ -56,7 +56,7 @@ class AuthenticationController extends Controller
             case 'admin':
                 return '/';
             case 'PATIENT':
-                return '/';
+                return '/dashboard-user';
             case 'user': 
             default:
                 return '/dashboard'; 
