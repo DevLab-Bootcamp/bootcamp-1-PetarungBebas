@@ -42,7 +42,7 @@
             </ul>
           </li>
           <li>
-             <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
+             <a href="{{url('/surat-dokter')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 2H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zM5 4h14a1 1 0 0 1 1 1v4H4V5a1 1 0 0 1 1-1zm14 16H5a1 1 0 0 1-1-1v-8h16v8a1 1 0 0 1-1 1zm-6-9h-2v2h-2v2h2v2h2v-2h2v-2h-2V9z"/>
                 </svg>
@@ -50,7 +50,7 @@
              </a>
           </li>
           <li>
-             <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
+             <a href="{{url('/medical-checkup')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 2H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zM5 4h14a1 1 0 0 1 1 1v4H4V5a1 1 0 0 1 1-1zm14 16H5a1 1 0 0 1-1-1v-8h16v8a1 1 0 0 1-1 1zm-7-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zm-3 2.75h2.25l1.5 2 1.5-2H15a2 2 0 0 1 2 2v1h-9v-1a2 2 0 0 1 2-2h.5z"/>
                 </svg>
@@ -58,7 +58,7 @@
              </a>
           </li>
           <li>
-             <a href="{{url('/auth-login')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
+             <a href="{{url('/riwayat-pemeriksaan')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2l4 4h-4V4zm-8 2h8v2H6V6zm0 4h8v2H6v-2zm0 4h8v2H6v-2zm0 4h8v2H6v-2z"/>
                   <path d="M9 11l2 2 4-4-1.5-1.5L11 11.5l-1.5-1.5L9 11z"/>
@@ -67,7 +67,7 @@
              </a>
           </li>
           <li>
-             <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
+             <a href="{{url('/event')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-gray-700 group hover:text-white">
                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 3h-3V1h-2v2H10V1H8v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-1 16H6V8h12v11z"/>
                 </svg>                

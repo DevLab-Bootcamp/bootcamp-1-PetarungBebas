@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KlinikKampus</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
+
 </head>
 <body>
     <div class="flex h-screen ">
@@ -26,21 +27,29 @@
         </header>
         <!-- Content Area -->
         <div class="grid grid-cols-3 gap-4 mb-4">
-            <div class="bg-white shadow-md rounded-md p-4">
+            <div class="bg-white shadow-md rounded-md p-3 h-40">
                 <h2 class="text-lg font-bold">Appointment Saya</h2>
-                <div class="mt-4">
-                  <p class="text-sm text-gray-600">Mon, 13 Jan 2025</p>
-                  <p class="text-sm text-blue-600 font-semibold">07:00 - 10:00</p>
-                  <p class="text-sm text-gray-600">Klinik UAD Kampus 4</p>
-                  <p class="text-sm text-gray-600">dr. Yusuf Maulana Sarif</p>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="rounded-sm">
-                    <rect width="24" height="24" fill="red" />
-                    <path d="M3 6h18M10 11v6M14 11v6M5 6l1 14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-14M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>                  
+                <div class="flex justify-between ">
+                  @php
+                $appointments = $appointments ?? collect();
+                @endphp
+                @if ($appointments->isNotEmpty())
+                @foreach ($appointments as $appointment)
+                    <div class="mt-4">
+                      <p class="text-sm text-gray-600">{{ \Carbon\Carbon::parse($appointment->schedule_id)->format('D, d M Y') }}</p>
+                      <p class="text-sm text-blue-600 font-semibold">{{ $appointment->time }}</p>
+                      <p class="text-sm text-gray-600">{{ $appointment->location }}</p>
+                      <p class="text-sm text-gray-600">{{ $appointment->doctor_id }}</p>
+                    </div>
+                  @endforeach
+                  @else
+                  <p class="mt-4 text-sm text-gray-600">Belum melakukan janji temu dengan dokter</p>
+                @endif
+                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah</button>
+                </div>             
               </div>
          
-              <div class="bg-white shadow-md rounded-md p-4">
+              <div class="bg-white shadow-md rounded-md p-4 h-40">
                 <h2 class="text-lg font-bold">Jadwal Event</h2>
                 <div class="mt-4">
                   <p class="text-sm text-gray-600">Event Besar UAD</p>
@@ -49,7 +58,6 @@
                   </p>
                   <p class="text-sm text-gray-600">Kuota: 200</p>
                 </div>
-                <button class="mt-4 text-blue-500 text-sm">Tambah</button>
               </div>
 
          <div class="bg-white shadow-md rounded-md p-4">
